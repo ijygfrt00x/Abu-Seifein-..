@@ -1,0 +1,1490 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>أسرة أبي سيفين وتماف إيريني | النظام السحابي لحضور اجتماع الشباب</title>
+
+<!-- Fonts: Cairo for modern Arabic UI & Cinzel for luxury headers -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+
+<!-- External Core Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+
+<style>
+/* ==========================================================================
+   DESIGN SYSTEM: LUXURY BLACK & ROYAL GOLD
+   ========================================================================== */
+:root {
+  --bg-base: #060608;
+  --bg-surface: #0e0e12;
+  --bg-surface-elevated: #15141b;
+  --bg-surface-card: rgba(20, 19, 25, 0.78);
+  --bg-glass: rgba(16, 15, 22, 0.65);
+  
+  --gold-100: #fff5d6;
+  --gold-200: #fae69e;
+  --gold-300: #eed074;
+  --gold-400: #dfb74a;
+  --gold-primary: #d4af37;
+  --gold-600: #aa8620;
+  --gold-700: #826315;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --gold-subtle: rgba(212, 175, 55, 0.08);
+  --gold-border: rgba(212, 175, 55, 0.22);
+  --gold-border-strong: rgba(212, 175, 55, 0.45);
+
+  --text-main: #f8f6f0;
+  --text-secondary: #c2bcae;
+  --text-muted: #8a8373;
+  --border-dim: rgba(255, 255, 255, 0.06);
+
+  --ok: #10b981;
+  --ok-bg: rgba(16, 185, 129, 0.12);
+  --ok-border: rgba(16, 185, 129, 0.3);
+  --bad: #f43f5e;
+  --bad-bg: rgba(244, 63, 94, 0.12);
+  --bad-border: rgba(244, 63, 94, 0.3);
+  --whatsapp: #25D366;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-gold: 0 8px 32px -4px rgba(212, 175, 55, 0.25);
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+  --transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Background Atmosphere Layers */
+.ambient-glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.ambient-glow::before { content: ''; position: absolute; top: -20%; right: 15%; width: 60vw; height: 60vw; max-width: 700px; max-height: 700px; background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%); filter: blur(80px); }
+.ambient-glow::after { content: ''; position: absolute; bottom: 0; left: 10%; width: 50vw; height: 50vw; max-width: 600px; max-height: 600px; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0, 0, 0, 0) 65%); filter: blur(90px); }
+.ambient-pattern { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.025; background-image: radial-gradient(var(--gold-primary) 1px, transparent 1px); background-size: 32px 32px; }
+
+/* Splash Intro */
+#splashOverlay { position: fixed; inset: 0; background: #050507; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s; }
+#splashOverlay.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash-cross { width: 78px; height: 78px; display: grid; place-items: center; font-size: 42px; border-radius: 50%; color: var(--gold-primary); background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(0,0,0,0.6) 100%); border: 1px solid var(--gold-border-strong); box-shadow: 0 0 50px var(--gold-glow); animation: pulseCross 1.8s infinite ease-in-out; }
+.splash-title { font-size: 26px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--gold-300), var(--gold-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+.splash-sub { font-size: 14px; color: var(--text-muted); letter-spacing: 2px; }
+.splash-skip { position: absolute; bottom: 32px; background: transparent; border: 1px solid var(--border-dim); color: var(--text-muted); font-size: 12px; padding: 6px 16px; border-radius: var(--radius-full); cursor: pointer; }
+@keyframes pulseCross { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px var(--gold-glow)); } 50% { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.6)); } }
+
+/* Layout */
+.app-container { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; min-height: 100vh; display: flex; padding: 20px 24px 100px 24px; gap: 28px; }
+
+/* Desktop Sidebar */
+.app-sidebar { width: 270px; flex-shrink: 0; position: sticky; top: 20px; height: calc(100vh - 40px); background: var(--bg-surface-card); backdrop-filter: blur(24px); border: 1px solid var(--gold-border); border-radius: var(--radius-xl); padding: 24px 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-card); }
+.brand-badge { display: flex; align-items: center; gap: 14px; padding: 10px 12px 18px 12px; border-bottom: 1px solid var(--border-dim); }
+.brand-cross-icon { width: 44px; height: 44px; border-radius: var(--radius-md); background: linear-gradient(135deg, #1f1a10, #0c0b09); border: 1px solid var(--gold-border-strong); color: var(--gold-primary); display: grid; place-items: center; font-size: 24px; box-shadow: inset 0 0 14px rgba(212, 175, 55, 0.15); }
+.brand-text h1 { font-size: 15px; font-weight: 800; color: var(--text-main); line-height: 1.25; }
+.brand-text p { font-size: 11px; color: var(--gold-400); margin-top: 2px; font-weight: 600; }
+.nav-menu { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; }
+.nav-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: var(--radius-md); color: var(--text-secondary); font-size: 14px; font-weight: 600; background: transparent; border: 1px solid transparent; cursor: pointer; transition: var(--transition); text-align: right; width: 100%; }
+.nav-item svg { width: 20px; height: 20px; stroke-width: 2; transition: var(--transition); color: var(--text-muted); }
+.nav-item:hover { color: var(--text-main); background: var(--gold-subtle); border-color: rgba(212, 175, 55, 0.15); }
+.nav-item:hover svg { color: var(--gold-primary); }
+.nav-item.active { background: linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.05)); color: var(--gold-200); border-color: var(--gold-border); box-shadow: inset 3px 0 0 var(--gold-primary); }
+.nav-item.active svg { color: var(--gold-primary); }
+.sidebar-footer { padding-top: 16px; border-top: 1px solid var(--border-dim); display: flex; flex-direction: column; gap: 12px; }
+.cloud-pill { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-dim); }
+.cloud-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--bad); transition: background 0.3s; }
+.cloud-dot.online { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+
+/* Main Content & Header */
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+.top-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.header-greeting h2 { font-size: 23px; font-weight: 800; letter-spacing: -0.5px; }
+.header-greeting p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.search-trigger-btn { display: flex; align-items: center; gap: 12px; background: var(--bg-surface-elevated); border: 1px solid var(--border-dim); color: var(--text-muted); padding: 9px 16px; border-radius: var(--radius-full); font-size: 13px; cursor: pointer; transition: var(--transition); }
+.search-trigger-btn:hover { border-color: var(--gold-border); color: var(--text-main); background: var(--bg-surface); }
+.kbd-shortcut { font-size: 10px; padding: 2px 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
+
+/* Buttons */
+button, .btn { font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; border-radius: var(--radius-md); font-size: 13.5px; font-weight: 700; cursor: pointer; transition: var(--transition); text-decoration: none; white-space: nowrap; border: 1px solid transparent; }
+.btn-primary { background: linear-gradient(135deg, var(--gold-400), var(--gold-primary)); color: #0b0a07; border-color: var(--gold-300); box-shadow: 0 4px 18px var(--gold-glow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 26px rgba(212, 175, 55, 0.5); background: linear-gradient(135deg, var(--gold-300), var(--gold-400)); }
+.btn-secondary { background: var(--bg-surface-elevated); color: var(--gold-200); border-color: var(--gold-border); }
+.btn-secondary:hover { background: var(--gold-subtle); border-color: var(--gold-border-strong); color: #fff; transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--text-secondary); border-color: var(--border-dim); }
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.04); color: var(--text-main); border-color: rgba(255, 255, 255, 0.15); }
+.btn-danger { background: var(--bad-bg); color: #fca5a5; border-color: var(--bad-border); }
+.btn-whatsapp { background: rgba(37, 211, 102, 0.15); color: var(--whatsapp); border-color: rgba(37, 211, 102, 0.4); }
+.btn-whatsapp:hover { background: var(--whatsapp); color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 12px; border-radius: var(--radius-sm); }
+
+/* Cards & Panels */
+.card-panel { background: var(--bg-surface-card); backdrop-filter: blur(20px); border: 1px solid var(--border-dim); border-radius: var(--radius-xl); padding: 22px; position: relative; overflow: hidden; box-shadow: var(--shadow-card); transition: var(--transition); }
+.card-panel.glow-rim { border-color: var(--gold-border); }
+.card-panel:hover { border-color: rgba(212, 175, 55, 0.32); }
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
+.panel-title { display: flex; align-items: center; gap: 10px; }
+.panel-title h3 { font-size: 17px; font-weight: 800; color: var(--text-main); }
+.panel-badge { font-size: 11px; font-weight: 700; color: var(--gold-300); background: var(--gold-subtle); border: 1px solid var(--gold-border); padding: 2px 10px; border-radius: var(--radius-full); }
+
+/* Stats Grid */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.stat-box { background: linear-gradient(145deg, rgba(22, 20, 27, 0.75), rgba(12, 11, 15, 0.9)); border: 1px solid var(--border-dim); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; transition: var(--transition); }
+.stat-box:hover { transform: translateY(-3px); border-color: var(--gold-border); box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8); }
+.stat-box::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: transparent; transition: var(--transition); }
+.stat-box.gold-stat::after { background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); }
+.stat-box.green-stat::after { background: linear-gradient(90deg, transparent, var(--ok), transparent); }
+.stat-box.red-stat::after { background: linear-gradient(90deg, transparent, var(--bad), transparent); }
+.stat-label { font-size: 12px; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+.stat-value { font-size: 32px; font-weight: 900; color: var(--text-main); margin-top: 8px; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+.stat-box.gold-stat .stat-value { color: var(--gold-200); }
+.stat-box.green-stat .stat-value { color: var(--ok); }
+.stat-box.red-stat .stat-value { color: var(--bad); }
+
+/* Weekly Banner */
+.session-hero-card { background: radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(14, 13, 17, 0.95) 70%); border: 1px solid var(--gold-border-strong); border-radius: var(--radius-xl); padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; box-shadow: 0 10px 40px -15px rgba(212, 175, 55, 0.2); }
+.session-meta-info { display: flex; flex-direction: column; gap: 6px; }
+.session-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gold-300); font-weight: 700; text-transform: uppercase; }
+.session-hero-title { font-size: 20px; font-weight: 800; color: #fff; }
+.session-code-display { display: flex; align-items: center; gap: 12px; background: rgba(0, 0, 0, 0.45); border: 1px dashed var(--gold-border-strong); padding: 8px 18px; border-radius: var(--radius-lg); }
+.session-code-num { font-family: 'Cinzel', monospace; font-size: 28px; font-weight: 900; letter-spacing: 6px; color: var(--gold-200); text-shadow: 0 0 15px var(--gold-glow); }
+
+/* Quick Attendance Input & Live Dropdown */
+.quick-input-container { position: relative; margin: 16px 0; }
+.quick-giant-input { width: 100%; background: rgba(10, 10, 14, 0.85); border: 1.5px solid var(--gold-border); border-radius: var(--radius-xl); padding: 18px 24px 18px 160px; font-size: 18px; font-family: inherit; color: var(--text-main); outline: none; transition: var(--transition); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+.quick-giant-input:focus { border-color: var(--gold-primary); box-shadow: 0 0 30px var(--gold-glow), inset 0 2px 10px rgba(0,0,0,0.5); background: rgba(15, 14, 20, 0.95); }
+.quick-input-actions { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; }
+.quick-feedback-toast { min-height: 28px; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-top: 6px; transition: var(--transition); }
+
+.quick-search-dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: var(--bg-surface-elevated);
+  border: 1px solid var(--gold-border-strong); border-radius: var(--radius-md); max-height: 280px; overflow-y: auto;
+  z-index: 1000; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.15);
+  display: flex; flex-direction: column; gap: 4px; padding: 8px;
+}
+.quick-search-item {
+  display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); border: 1px solid transparent;
+}
+.quick-search-item:hover, .quick-search-item:active { background: rgba(212, 175, 55, 0.08); border-color: rgba(212, 175, 55, 0.3); }
+
+/* Camera Scanner Viewfinder */
+.scan-camera-modal { display: none; background: #000; border: 1px solid var(--gold-border); border-radius: var(--radius-xl); padding: 16px; margin-top: 16px; position: relative; text-align: center; }
+.scan-viewport { position: relative; max-width: 420px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--gold-primary); }
+.scan-viewport video { width: 100%; display: block; }
+.scan-reticle { position: absolute; inset: 20%; border: 2px dashed rgba(212, 175, 55, 0.8); border-radius: 12px; pointer-events: none; box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45); animation: scanLaser 2s infinite ease-in-out; }
+@keyframes scanLaser { 0%, 100% { border-color: rgba(212, 175, 55, 0.4); } 50% { border-color: rgba(212, 175, 55, 1); } }
+
+/* Members Explorer */
+.members-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; margin-top: 16px; }
+.member-vip-card { background: linear-gradient(145deg, rgba(22, 20, 28, 0.8), rgba(13, 12, 16, 0.95)); border: 1px solid var(--border-dim); border-radius: var(--radius-lg); padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; position: relative; transition: var(--transition); }
+.member-vip-card:hover { transform: translateY(-4px); border-color: var(--gold-border-strong); box-shadow: 0 12px 30px -8px rgba(212, 175, 55, 0.15); }
+.card-user-header { display: flex; align-items: center; gap: 12px; }
+.avatar-halo { width: 48px; height: 48px; border-radius: var(--radius-md); background: radial-gradient(circle, #292212, #111); border: 1px solid var(--gold-border); color: var(--gold-200); font-weight: 800; display: grid; place-items: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+.card-user-info { flex: 1; min-width: 0; }
+.card-user-info h4 { font-size: 15px; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-id-pill { font-size: 11px; color: var(--gold-400); font-weight: 700; }
+.card-meta-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-muted); padding: 8px 10px; background: rgba(0, 0, 0, 0.3); border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.03); }
+.card-actions-bar { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+
+/* Pulse Grid & WhatsApp */
+.pulse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
+.pulse-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-dim); border-radius: var(--radius-md); margin-bottom: 8px; transition: var(--transition); }
+.pulse-row:hover { border-color: var(--gold-border-strong); background: rgba(212,175,55,0.05); }
+.pulse-user-info { display: flex; align-items: center; gap: 12px; }
+.streak-fire { color: #ff6b6b; font-weight: 900; display: flex; align-items: center; gap: 6px; }
+
+/* Tables */
+.table-scroll { width: 100%; overflow-x: auto; border: 1px solid var(--border-dim); border-radius: var(--radius-lg); background: rgba(10, 10, 13, 0.6); }
+table.luxury-table { width: 100%; border-collapse: collapse; text-align: right; min-width: 700px; }
+table.luxury-table th { padding: 14px 16px; background: rgba(20, 18, 25, 0.85); color: var(--gold-200); font-size: 12.5px; font-weight: 800; border-bottom: 1px solid var(--gold-border); white-space: nowrap; }
+table.luxury-table td { padding: 12px 16px; font-size: 13.5px; border-bottom: 1px solid var(--border-dim); color: var(--text-main); vertical-align: middle; }
+table.luxury-table tr:hover td { background: rgba(212, 175, 55, 0.03); }
+.cell-input { background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-dim); border-radius: var(--radius-sm); color: var(--text-main); font-family: inherit; font-size: 13px; padding: 6px 10px; width: 100%; outline: none; transition: var(--transition); }
+.cell-input:focus { border-color: var(--gold-border-strong); background: rgba(14, 13, 18, 0.9); }
+.status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-full); font-size: 12px; font-weight: 700; }
+.status-pill.present { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-border); }
+.status-pill.absent { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-border); }
+
+/* Fast Attendance Buttons */
+.toggle-btn-group { display: inline-flex; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-dim); background: #0a0a0d; }
+.toggle-item-btn { padding: 6px 14px; font-size: 12px; font-weight: 700; border: none; background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+.toggle-item-btn.active-ok { background: var(--ok); color: #042416; }
+.toggle-item-btn.active-bad { background: var(--bad); color: #2b040c; }
+
+/* Raffle Stage */
+.raffle-arena { position: relative; background: radial-gradient(circle at center, #1e190e 0%, #0c0b08 60%, #050507 100%); border: 1px solid var(--gold-border-strong); border-radius: var(--radius-xl); padding: 50px 20px; text-align: center; overflow: hidden; box-shadow: inset 0 0 80px rgba(0,0,0,0.8), 0 20px 60px -20px rgba(212, 175, 55, 0.2); min-height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.raffle-spotlight { position: absolute; top: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%); filter: blur(40px); pointer-events: none; }
+.raffle-avatar-stage { font-size: 48px; margin-bottom: 12px; }
+.raffle-display-name { font-size: 38px; font-weight: 900; color: var(--gold-100); text-shadow: 0 0 25px var(--gold-glow); line-height: 1.3; transition: transform 0.08s ease; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+.raffle-display-name.bounce { animation: rfBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.raffle-display-name.winner-hero { color: var(--ok); text-shadow: 0 0 35px rgba(16, 185, 129, 0.6); font-size: 42px; }
+@keyframes rfBounce { 0% { transform: scale(0.65); opacity: 0; } 70% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+
+/* Projector Mode */
+.projector-canvas { display: none; position: fixed; inset: 0; background: #030304; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+body.projector-active .app-container { display: none !important; }
+body.projector-active .projector-canvas { display: flex !important; }
+.proj-tabs { position: absolute; top: 30px; display: flex; gap: 15px; z-index: 10; }
+.proj-view { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.proj-giant-number { font-size: 240px; font-weight: 900; color: var(--gold-primary); text-shadow: 0 0 100px rgba(212,175,55,0.4); line-height: 1; margin-bottom: 20px; font-variant-numeric: tabular-nums; }
+.proj-target-text { font-size: 40px; color: var(--text-muted); font-weight: 700; }
+.proj-raffle-arena { width: 90vw; height: 80vh; background: transparent; border: none; }
+
+/* Mobile Dock */
+.mobile-dock { display: none; position: fixed; bottom: 16px; left: 16px; right: 16px; height: 64px; background: rgba(14, 13, 19, 0.88); backdrop-filter: blur(28px); border: 1px solid var(--gold-border-strong); border-radius: var(--radius-full); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--gold-glow); z-index: 999; padding: 0 12px; align-items: center; justify-content: space-around; }
+.dock-item { display: flex; flex-direction: column; align-items: center; gap: 3px; background: transparent; border: none; color: var(--text-muted); font-size: 10.5px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: var(--radius-full); transition: var(--transition); }
+.dock-item svg { width: 20px; height: 20px; stroke-width: 2; }
+.dock-item.active { color: var(--gold-200); background: var(--gold-subtle); }
+.dock-item.active svg { color: var(--gold-primary); transform: translateY(-2px); }
+
+/* Modals */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(14px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; animation: modalFadeIn 0.25s ease-out; }
+@keyframes modalFadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+.modal-dialog { background: var(--bg-surface); border: 1px solid var(--gold-border-strong); border-radius: var(--radius-xl); padding: 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px var(--gold-glow); position: relative; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.modal-header h3 { font-size: 18px; font-weight: 800; color: var(--gold-200); }
+
+/* ID Card Print Preview */
+.card-print-canvas { width: 340px; height: 210px; background: linear-gradient(135deg, #181510, #0a0907); border: 2px solid var(--gold-primary); border-radius: 16px; padding: 16px; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 15px 35px rgba(0,0,0,0.8); margin: 0 auto; }
+.card-print-canvas::before { content: '✝'; position: absolute; left: -10px; bottom: -30px; font-size: 130px; color: rgba(212, 175, 55, 0.08); pointer-events: none; }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.card-brand-title { font-size: 14px; font-weight: 900; color: var(--gold-200); }
+.card-brand-sub { font-size: 11px; color: var(--text-muted); }
+.card-body-name { font-size: 19px; font-weight: 900; color: #fff; line-height: 1.2; }
+.card-body-id { font-size: 12px; color: var(--gold-400); margin-top: 4px; font-weight: 700; }
+.card-qr-box { background: #fff; padding: 5px; border-radius: 6px; width: 74px; height: 74px; display: grid; place-items: center; }
+.card-foot { font-size: 10px; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 6px; }
+
+/* Toast */
+#toastNotification { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--bg-surface-elevated); border: 1px solid var(--gold-border-strong); color: var(--text-main); padding: 12px 24px; border-radius: var(--radius-full); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px var(--gold-glow); font-size: 14px; font-weight: 700; z-index: 999999; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 10px; pointer-events: none; }
+#toastNotification.show { transform: translateX(-50%) translateY(0); }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .app-sidebar, .mobile-dock, .top-header, .ambient-glow, .ambient-pattern,
+  #splashOverlay, .card-panel, .nav-menu, .modal-overlay, #toastNotification { display: none !important; }
+  #printArea { display: block !important; position: absolute; top: 0; left: 0; width: 100%; }
+  .printPage { width: 210mm; box-sizing: border-box; padding: 6mm; display: grid; grid-template-columns: repeat(2, 85.6mm); grid-auto-rows: 54mm; gap: 4mm; justify-content: center; page-break-after: always; }
+  .printCard { width: 85.6mm; height: 54mm; border: 1.5px solid #a68428; border-radius: 4mm; padding: 4mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; background: #fff; color: #111; break-inside: avoid; }
+  .qrPage { width: 210mm; box-sizing: border-box; padding: 10mm; display: grid; grid-template-columns: repeat(3, 46mm); grid-auto-rows: 28mm; gap: 3mm; justify-content: center; align-content: start; page-break-after: always; }
+  .qrBadge { width: 46mm; height: 28mm; border: 1px solid #999; border-radius: 3mm; display: flex; align-items: center; gap: 2mm; padding: 2mm; box-sizing: border-box; break-inside: avoid; }
+  .qrBadge .qr-print-box { width: 22mm; height: 22mm; flex: none; }
+  .qrBadge .qrTxt { font-size: 9px; line-height: 1.4; overflow: hidden; }
+  .qrBadge .qrTxt b { display: block; font-size: 11px; }
+  @page { size: A4; margin: 0; }
+}
+#printArea { display: none; }
+
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .app-sidebar { display: none; }
+  .mobile-dock { display: flex; }
+  .app-container { padding: 16px 16px 90px 16px; }
+}
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .session-hero-card { flex-direction: column; align-items: flex-start; }
+  .session-code-display { width: 100%; justify-content: center; }
+  .quick-giant-input { padding-left: 20px; font-size: 16px; }
+  .quick-input-actions { position: static; transform: none; margin-top: 10px; justify-content: flex-end; }
+  .raffle-display-name { font-size: 28px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ambient-glow"></div>
+<div class="ambient-pattern"></div>
+
+<!-- 1. CINEMATIC APP INTRO OVERLAY -->
+<div id="splashOverlay">
+  <div class="splash-cross">☩</div>
+  <div class="splash-title">أسرة أبي سيفين وتماف إيريني</div>
+  <div class="splash-sub">اجتماع الشباب • المنظومة الذكية</div>
+  <button class="splash-skip" id="btnSkipIntro">تخطي ومتابعة</button>
+</div>
+
+<!-- 2. MAIN APPLICATION CONTAINER -->
+<div class="app-container">
+
+  <!-- Desktop Floating Glass Sidebar -->
+  <aside class="app-sidebar">
+    <div>
+      <div class="brand-badge">
+        <div class="brand-cross-icon">☩</div>
+        <div class="brand-text">
+          <h1>أبي سيفين وإيريني</h1>
+          <p>اجتماع الشباب</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="viewDashboard">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          الرئيسية
+        </button>
+        <button class="nav-item" data-view="viewAttendance">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          تسجيل الحضور
+        </button>
+        <button class="nav-item" data-view="viewPulse" style="color:var(--gold-300);">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          نبض الاجتماع
+        </button>
+        <button class="nav-item" data-view="viewMembers">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          الأعضاء والكروت
+        </button>
+        <button class="nav-item" data-view="viewRaffle">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 01-2-2V8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 01-2 2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+          سحب الجوائز
+        </button>
+        <button class="nav-item" data-view="viewAnalytics">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          الإحصائيات
+        </button>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="cloud-pill">
+        <span class="cloud-dot" id="cloudIndicator"></span>
+        <span id="cloudStatusText">جارٍ الاتصال بالسحابة...</span>
+      </div>
+      <div style="font-size: 11px; color: var(--text-muted); text-align: center;">
+        منظومة إدارة الشباب • إصدار 2026
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Floating Dock (iOS/Android) -->
+  <nav class="mobile-dock">
+    <button class="dock-item active" data-view="viewDashboard">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>الرئيسية</span>
+    </button>
+    <button class="dock-item" data-view="viewAttendance">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      <span>الحضور</span>
+    </button>
+    <button class="dock-item" data-view="viewPulse" style="color:var(--gold-300);">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      <span>النبض</span>
+    </button>
+    <button class="dock-item" data-view="viewMembers">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <span>الأعضاء</span>
+    </button>
+    <button class="dock-item" data-view="viewRaffle">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 01-2-2V8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 01-2 2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+      <span>الجوائز</span>
+    </button>
+  </nav>
+
+  <!-- Main View Area -->
+  <main class="app-main">
+
+    <!-- Top Universal App Header -->
+    <header class="top-header">
+      <div class="header-greeting">
+        <h2 id="greetingText">مساء الخير 👋 أهلاً بك في اجتماع الشباب</h2>
+        <p id="currentLiveDate">—</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn btn-secondary btn-sm" id="btnLaunchProjector" style="margin-left: 8px;">
+          📽️ وضع شاشة القاعة
+        </button>
+        <button class="search-trigger-btn" id="btnOpenSearch">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <span>بحث سريع بالاسم أو الكود...</span>
+          <span class="kbd-shortcut">Ctrl+K</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         VIEW 1: DASHBOARD & OVERVIEW
+         ==================================================================== -->
+    <section id="viewDashboard" class="view-panel">
+      <!-- Weekly Session Hero Spotlight -->
+      <div class="session-hero-card">
+        <div class="session-meta-info">
+          <div class="session-tag">
+            <span>✨</span>
+            <span>جلسة الحضور الأسبوعية الحالية</span>
+          </div>
+          <div class="session-hero-title" id="dashHeroDateText">جمعة مباركة • اجتماع الشباب</div>
+          <div style="font-size: 13px; color: var(--text-secondary);">
+            يمكن للأعضاء تسجيل الحضور ذاتيًا عبر كود الجلسة المباشر.
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <div class="session-code-display">
+            <span style="font-size:12px; color:var(--text-muted);">كود اليوم:</span>
+            <span class="session-code-num" id="dashWeeklyCode">—</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btnCopyWeeklyCode">نسخ الكود</button>
+        </div>
+      </div>
+
+      <!-- Live Core Metrics Grid -->
+      <div class="stats-grid" style="margin-top: 18px;">
+        <div class="stat-box gold-stat">
+          <div class="stat-label"><span>إجمالي الأعضاء</span></div>
+          <div class="stat-value" id="dashTotalMembers">0</div>
+          <div class="stat-foot">مسجلون في المنظومة</div>
+        </div>
+        <div class="stat-box green-stat">
+          <div class="stat-label"><span>الحاضرون اليوم</span></div>
+          <div class="stat-value" id="dashPresentCount">0</div>
+          <div class="stat-foot">حضور مؤكد بالجلسة</div>
+        </div>
+        <div class="stat-box red-stat">
+          <div class="stat-label"><span>الغائبون</span></div>
+          <div class="stat-value" id="dashAbsentCount">0</div>
+          <div class="stat-foot">لم يسجلوا بعد</div>
+        </div>
+        <div class="stat-box pct-stat">
+          <div class="stat-label"><span>نسبة الحضور</span></div>
+          <div class="stat-value" id="dashAttendanceRate">0%</div>
+          <div class="stat-foot">معدل التزام اليوم</div>
+        </div>
+      </div>
+
+      <!-- Quick Session Attendance Preview -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:20px;">
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span style="color:var(--ok);">✓</span><h3>سجل الحضور اللحظي (اليوم)</h3>
+            </div>
+            <span class="panel-badge" id="dashPresentBadgeCount">0 عضو</span>
+          </div>
+          <div id="dashPresentScrollList" style="max-height: 280px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span style="color:var(--bad);">✕</span><h3>الأعضاء الغائبون اليوم</h3>
+            </div>
+            <span class="panel-badge" id="dashAbsentBadgeCount">0 عضو</span>
+          </div>
+          <div id="dashAbsentScrollList" style="max-height: 280px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: ATTENDANCE COMMAND CENTER (WITH LIVE DROPDOWN SEARCH)
+         ==================================================================== -->
+    <section id="viewAttendance" class="view-panel" style="display:none;">
+      <div class="card-panel glow-rim">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="brand-cross-icon" style="width:34px; height:34px; font-size:18px;">✓</div>
+            <div>
+              <h3>تسجيل الحضور والغياب المباشر</h3>
+              <p style="font-size:12px; color:var(--text-muted);">تسجيل فوري عبر الباركود، الكود، الكاميرا أو التحديد اليدوي</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <label style="font-size:12px; color:var(--text-muted);">تاريخ الجلسة:</label>
+            <input type="date" id="sessionDate" class="cell-input" style="width:auto; padding:8px 12px; font-size:13px;">
+          </div>
+        </div>
+
+        <div class="quick-input-container">
+          <input type="text" id="quickCode" class="quick-giant-input" placeholder="اكتب اسم العضو أو رقم الكود واضغط Enter، أو امسح بجهاز الـ QR..." autocomplete="off">
+          <div class="quick-input-actions">
+            <button class="btn btn-secondary btn-sm" id="btnToggleCamera">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              كاميرا الموبايل
+            </button>
+          </div>
+          <!-- Live Search Dropdown Overlay -->
+          <div id="quickSearchResults" class="quick-search-dropdown" style="display:none;"></div>
+        </div>
+        <div id="quickMsg" class="quick-feedback-toast"></div>
+
+        <div id="scanWrap" class="scan-camera-modal">
+          <div class="scan-viewport"><video id="scanVideo" playsinline muted></video><div class="scan-reticle"></div></div>
+          <canvas id="scanCanvas" style="display:none"></canvas>
+          <div style="margin-top:10px; font-size:13px; color:var(--gold-200);" id="scanMsg">وجّه الكاميرا نحو QR الكارت</div>
+        </div>
+
+        <!-- 🔐 SESSION CODE GENERATOR (NEW LOCATION) -->
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.4); border:1px dashed var(--gold-border-strong); padding:16px 20px; border-radius:var(--radius-lg); margin-top:20px; flex-wrap:wrap; gap:16px;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:42px; height:42px; border-radius:50%; background:var(--gold-subtle); display:grid; place-items:center; font-size:20px; border:1px solid var(--gold-border);">🔐</div>
+            <div>
+              <h4 style="font-size:14px; font-weight:800; color:var(--gold-200); margin-bottom:2px;">كود الحضور الذاتي (للشباب)</h4>
+              <p style="font-size:11px; color:var(--text-muted);">توليد كود خماسي عشوائي (يصعب توقعه) لتسجيل الحضور عبر هواتف الشباب</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="background:#000; padding:6px 16px; border-radius:var(--radius-md); border:1px solid #333;">
+              <span style="font-family:'Cinzel', monospace; font-size:22px; font-weight:900; letter-spacing:4px; color:var(--gold-primary);" id="attActiveCodeDisplay">—</span>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btnGenerateAttCode">توليد كود اليوم</button>
+            <button class="btn btn-secondary btn-sm" id="btnCopyAttCode">نسخ</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border-dim);">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-ghost btn-sm" id="markAllPresent">تسجيل الكل حاضر</button>
+            <button class="btn btn-ghost btn-sm" id="markSelPresent">المحدد حاضر</button>
+            <button class="btn btn-ghost btn-sm" id="markSelAbsent">المحدد غائب</button>
+            <button class="btn btn-danger btn-sm" id="resetAttendance">تصفير اليوم</button>
+            <button class="btn btn-secondary btn-sm" id="wkExportBtn">📥 تصدير الإكسيل</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:13px;">
+            <span style="color:var(--ok);">حاضر: <b id="presentCount">0</b></span>
+            <span style="color:var(--bad);">غائب: <b id="absentCount">0</b></span>
+            <span style="color:var(--gold-300);">النسبة: <b id="attendancePct">0%</b></span>
+          </div>
+        </div>
+
+        <div class="table-scroll" style="margin-top:16px;">
+          <table class="luxury-table">
+            <thead>
+              <tr>
+                <th style="width:40px; text-align:center;"><input type="checkbox" id="masterAtt"></th>
+                <th>كود العضو</th>
+                <th>اسم العضو</th>
+                <th>الحالة الحالية</th>
+                <th>تغيير سريع</th>
+                <th>ملاحظة اليوم</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceBody"></tbody>
+          </table>
+          <div id="attendanceEmpty" style="display:none; text-align:center; padding:40px; color:var(--text-muted);">لا يوجد أعضاء بعد.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: 🫀 MEETING PULSE
+         ==================================================================== -->
+    <section id="viewPulse" class="view-panel" style="display:none;">
+      <div class="pulse-grid">
+        
+        <!-- Follow-up Radar -->
+        <div class="card-panel">
+          <div class="panel-header" style="margin-bottom:12px;">
+            <div class="panel-title"><span style="font-size:22px;">🎯</span><h3>رادار الافتقاد (غائبون اليوم)</h3></div>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">مراسلة سريعة للشباب اللي غابوا عن اجتماع النهاردة.</p>
+          <div id="pulseAbsentList" style="max-height:400px; overflow-y:auto; padding-right:5px;"></div>
+        </div>
+
+        <!-- Attendance Streaks -->
+        <div class="card-panel">
+          <div class="panel-header" style="margin-bottom:12px;">
+            <div class="panel-title"><span style="font-size:22px;">🔥</span><h3>أبطال الاستمرارية (Streaks)</h3></div>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">الشباب الأكثر انتظاماً دون انقطاع عبر الجلسات السابقة.</p>
+          <div id="pulseStreaksList" style="max-height:400px; overflow-y:auto; padding-right:5px;"></div>
+        </div>
+
+        <!-- Birthdays Board -->
+        <div class="card-panel">
+          <div class="panel-header" style="margin-bottom:12px;">
+            <div class="panel-title"><span style="font-size:22px;">🎂</span><h3>أعياد ميلاد الشهر الحالي</h3></div>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">لتكريمهم والاحتفال بهم في الاجتماع القادم.</p>
+          <div id="pulseBirthdaysList" style="max-height:400px; overflow-y:auto; padding-right:5px;"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: MEMBERS & CARDS EXPLORER
+         ==================================================================== -->
+    <section id="viewMembers" class="view-panel" style="display:none;">
+      <div class="card-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="brand-cross-icon" style="width:34px; height:34px; font-size:18px;">👥</div>
+            <div>
+              <h3>دليل الأعضاء وكروت العضوية</h3>
+              <p style="font-size:12px; color:var(--text-muted);">إدارة كاملة، طباعة بطاقات العضوية بالـ QR والمزامنة الفورية</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="view-switchers">
+              <button class="view-btn active" id="btnViewCards">كروت</button>
+              <button class="view-btn" id="btnViewList">جدول</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; background:rgba(0,0,0,0.3); padding:14px; border-radius:var(--radius-lg); border:1px solid var(--border-dim);">
+          <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:240px;">
+            <input type="text" id="memberSearchInput" class="cell-input" placeholder="تصفية الأعضاء بالاسم أو الكود..." style="padding:10px 14px;">
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <input type="file" id="fileExcel" accept=".xlsx,.xls,.csv" style="display:none;">
+            <button class="btn btn-secondary btn-sm" onclick="$('fileExcel').click()">رفع Excel</button>
+            <button class="btn btn-primary btn-sm" id="printSelected">طباعة المحدد</button>
+            <button class="btn btn-ghost btn-sm" id="printAll">طباعة الكل</button>
+            <button class="btn btn-ghost btn-sm" id="printQrSheet">كشف كل الـ QR</button>
+            <button class="btn btn-danger btn-sm" id="clearBtn">مسح السجل</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:12.5px; color:var(--text-muted);">
+          <div>إجمالي الأعضاء: <b id="totalMembersBadge" style="color:var(--gold-200);">0</b> | المحدد: <b id="selectedCountBadge">0</b></div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-ghost btn-sm" id="selectAll">تحديد الكل</button>
+            <button class="btn btn-ghost btn-sm" id="clearSelection">إلغاء التحديد</button>
+          </div>
+        </div>
+
+        <!-- Cards View -->
+        <div id="membersCardsContainer" class="members-cards-grid"></div>
+
+        <!-- Table View -->
+        <div id="membersTableContainer" class="table-scroll" style="margin-top:16px; display:none;">
+          <table class="luxury-table">
+            <thead>
+              <tr>
+                <th style="width:40px; text-align:center;"><input type="checkbox" id="masterMember"></th>
+                <th>رقم العضوية</th>
+                <th>اسم العضو</th>
+                <th>رقم الهاتف / الواتساب</th>
+                <th>تاريخ الميلاد</th>
+                <th>ملاحظة عامة</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody"></tbody>
+          </table>
+        </div>
+
+        <div id="membersEmptyMsg" style="display:none; text-align:center; padding:50px; color:var(--text-muted);">لم يتم العثور على أعضاء.</div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: GRAND RAFFLE ARENA
+         ==================================================================== -->
+    <section id="viewRaffle" class="view-panel" style="display:none;">
+      <div class="card-panel glow-rim">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="brand-cross-icon" style="width:34px; height:34px; font-size:18px;">🎁</div>
+            <div>
+              <h3>سحب الجوائز الأسبوعي الفاخر</h3>
+              <p style="font-size:12px; color:var(--text-muted);">السحب يتم حصريًا من بين الحاضرين المؤكدين لجلسة اليوم</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:14px; font-size:13px;">
+            <span>الحاضرون اليوم: <b id="rfPresentToday" style="color:var(--ok);">0</b></span>
+            <span>المؤهلون للسحب: <b id="rfPoolCount" style="color:var(--gold-200);">0</b></span>
+          </div>
+        </div>
+
+        <div id="rfDateWarn" style="display:none; background:var(--bad-bg); border:1px solid var(--bad-border); color:#fca5a5; padding:10px 14px; border-radius:var(--radius-md); font-size:13px; margin-bottom:14px;"></div>
+
+        <div class="raffle-arena" id="raffleStageNormal">
+          <div class="raffle-spotlight"></div>
+          <canvas id="confettiCanvasNormal"></canvas>
+          <div class="raffle-avatar-stage">🏆</div>
+          <div class="raffle-display-name" id="raffleBigNormal">جاهزون للسحب؟</div>
+          <div class="raffle-subtitle" id="raffleSubNormal">اضغط على زر السحب لاختيار الفائز</div>
+        </div>
+
+        <div style="display:flex; justify-content:center; align-items:center; gap:16px; margin-top:24px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:8px; background:rgba(0,0,0,0.4); padding:6px 14px; border-radius:var(--radius-md); border:1px solid var(--border-dim);">
+            <label style="font-size:12px; color:var(--text-muted);">عدد الجوائز:</label>
+            <input type="number" id="rfTotalPrizes" value="1" min="1" class="cell-input" style="width:65px; text-align:center; padding:4px;">
+          </div>
+          <label style="display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-secondary); cursor:pointer;">
+            <input type="checkbox" id="rfNoRepeat" checked><span>منع تكرار فوز العضو</span>
+          </label>
+          <button class="btn btn-primary" id="raffleBtnNormal" style="padding:12px 32px; font-size:16px;">🎉 ابدأ السحب الآن</button>
+          <button class="btn btn-danger btn-sm" id="rfReset">إعادة ضبط السحب</button>
+        </div>
+
+        <div style="margin-top:28px;">
+          <h4 style="font-size:15px; font-weight:800; color:var(--gold-200); margin-bottom:12px;">لوحة شرف الفائزين 🎖️</h4>
+          <div class="table-scroll">
+            <table class="luxury-table">
+              <thead><tr><th>الجائزة</th><th>اسم الفائز</th><th>وقت السحب</th></tr></thead>
+              <tbody id="raffleWinnersBody"></tbody>
+            </table>
+            <div id="raffleWinnersEmpty" style="text-align:center; padding:30px; color:var(--text-muted); font-size:13px;">لم يتم سحب جوائز لهذه الجلسة حتى الآن.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 6: ANALYTICS & STATS
+         ==================================================================== -->
+    <section id="viewAnalytics" class="view-panel" style="display:none;">
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+        <div class="card-panel">
+          <div class="panel-header"><div class="panel-title"><span style="font-size:20px;">🏆</span><h3>الأكثر التزاماً بالحضور</h3></div></div>
+          <div id="dashTopPresent" class="leaderboard-list"></div>
+        </div>
+        <div class="card-panel">
+          <div class="panel-header"><div class="panel-title"><span style="font-size:20px;">⚠️</span><h3>الأعضاء الأكثر غياباً (يحتاجون افتقاد)</h3></div></div>
+          <div id="dashTopAbsent" class="leaderboard-list"></div>
+        </div>
+      </div>
+
+      <div class="card-panel" style="margin-top:20px;">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span style="font-size:20px;">📊</span>
+            <div><h3>السجل التراكمي لكافة الأعضاء</h3><p style="font-size:12px; color:var(--text-muted);">محسوب تلقائيًا من كافة الجلسات المسجلة عبر السحابة</p></div>
+          </div>
+          <div>الجلسات المسجلة: <b id="dashSessionsCount" style="color:var(--gold-200);">0</b></div>
+        </div>
+        <div class="table-scroll">
+          <table class="luxury-table">
+            <thead><tr><th>رقم العضوية</th><th>اسم العضو</th><th>مرات الحضور</th><th>نسبة الالتزام</th></tr></thead>
+            <tbody id="dashAllBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ====================================================================
+     PROJECTOR MODE (CINEMATIC FULL SCREEN)
+     ==================================================================== -->
+<div id="projectorCanvas" class="projector-canvas">
+  <button class="btn btn-ghost" id="btnExitProjector" style="position:absolute; top:20px; right:20px; z-index:100;">✕ إنهاء العرض</button>
+  
+  <div class="proj-tabs">
+    <button class="btn btn-secondary proj-tab-btn active" data-target="projCounterView">عداد الحضور 🎯</button>
+    <button class="btn btn-secondary proj-tab-btn" data-target="projRaffleView">سحب الجوائز 🎁</button>
+  </div>
+
+  <div id="projCounterView" class="proj-view">
+    <div class="proj-giant-number" id="projLiveCount">0</div>
+    <div class="proj-target-text">حاضرون اليوم من أصل <span id="projLiveTotal" style="color:var(--gold-200);">0</span></div>
+  </div>
+
+  <div id="projRaffleView" class="proj-view" style="display:none;">
+    <div class="raffle-arena proj-raffle-arena" id="raffleStageProj" style="border:none; box-shadow:none;">
+      <canvas id="confettiCanvasProj" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;"></canvas>
+      <div style="font-size:70px; margin-bottom:20px;">🏆</div>
+      <div class="raffle-display-name" id="raffleBigProj" style="font-size:90px;">جاهزون للسحب؟</div>
+      <div style="color:var(--text-muted); margin-top:20px; font-size:24px;" id="raffleSubProj">الأنظار تتجه للشاشة</div>
+    </div>
+    <button class="btn btn-primary" id="raffleBtnProj" style="padding:16px 40px; font-size:24px; margin-top:40px; border-radius:var(--radius-xl);">🎉 اسحب الجائزة</button>
+  </div>
+</div>
+
+<!-- ====================================================================
+     GLOBAL SEARCH & COMMAND OVERLAY (Ctrl+K)
+     ==================================================================== -->
+<div class="modal-overlay" id="searchModal">
+  <div class="modal-dialog" style="max-width:540px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:var(--gold-primary);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="omniSearchInput" class="cell-input" placeholder="ابحث باسم العضو، رقم الكود..." style="padding:12px; font-size:15px; border-color:var(--gold-border);" autofocus>
+    </div>
+    <div id="omniSearchResults" style="max-height:320px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:12px; color:var(--text-muted);">
+      <span>اضغط على أي عضو لعرض كارت العضوية أو تسجيل الحضور</span>
+      <button class="btn btn-ghost btn-sm" id="btnCloseSearch">إغلاق (Esc)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================================
+     MEMBER ID CARD DIGITAL PREVIEW MODAL
+     ==================================================================== -->
+<div class="modal-overlay" id="cardModal">
+  <div class="modal-dialog" style="max-width:420px; text-align:center;">
+    <div class="modal-header">
+      <h3>كارت العضوية الإلكتروني</h3>
+      <button class="btn btn-ghost btn-sm" id="btnCloseCardModal">✕</button>
+    </div>
+    <div id="cardModalContainer"></div>
+    <div style="display:flex; justify-content:center; gap:10px; margin-top:20px;">
+      <button class="btn btn-primary btn-sm" id="btnPrintSingleCard">طباعة هذا الكارت</button>
+      <button class="btn btn-ghost btn-sm" id="btnDismissCard">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<!-- Universal Confirmation / Alert Modal -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-dialog" style="max-width:380px;">
+    <div id="confirmModalMsg" style="font-size:14.5px; line-height:1.7; margin-bottom:20px; color:var(--text-main);"></div>
+    <div style="display:flex; justify-content:flex-end; gap:10px;">
+      <button class="btn btn-primary" id="confirmModalOk">تأكيد</button>
+      <button class="btn btn-ghost" id="confirmModalCancel">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- Universal Floating Toast -->
+<div id="toastNotification">
+  <span id="toastIcon">✨</span>
+  <span id="toastText">تمت العملية بنجاح</span>
+</div>
+
+<!-- Hidden Clean Print Rendering Canvas -->
+<div id="printArea"></div>
+
+<!-- ====================================================================
+     FIREBASE ARCHITECTURE & SYSTEM LOGIC
+     ==================================================================== -->
+<script type="module">
+const firebaseConfig = {
+  apiKey: "AIzaSyBYsIALutHZmfmswRXj9zU50bvJLAalpgM",
+  authDomain: "abu-seifein-youth.firebaseapp.com",
+  projectId: "abu-seifein-youth",
+  storageBucket: "abu-seifein-youth.firebasestorage.app",
+  messagingSenderId: "157182913840",
+  appId: "1:157182913840:web:5d688832c108014792acf5",
+  measurementId: "G-96D8H1RPHM"
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+const LOCAL_STORAGE_KEY = "abu_seifein_members_cloud_cache_v3";
+
+let db = null;
+let members = [];
+try { members = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"); } catch(e) { members = []; }
+
+let selected = new Set();
+let attendanceMap = {};
+let attendanceNotes = {};
+let unsubAttendance = null;
+const noteDebounceTimers = {};
+let unsubAllAttendance = null;
+let allHistoricalDays = [];
+
+let weeklySession = { date: null, code: null };
+let weeklyRecords = {};
+let weeklyTimes = {};
+let unsubWeeklyMeta = null;
+let unsubWeeklyAtt = null;
+
+let raffleWinners = {};
+let raffleTotalPrizes = 1;
+let raffleNoRepeat = true;
+let unsubRaffle = null;
+let raffling = false;
+
+let activeViewMode = "cards";
+let singlePrintMember = null;
+
+/* Utility Date Functions */
+function todayStr() { const d = new Date(), p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()); }
+function nextFriday() { const d = new Date(); const diff = (5 - d.getDay() + 7) % 7; d.setDate(d.getDate() + diff); const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()); }
+function sessionDate() { return $("sessionDate").value || todayStr(); }
+function formatTime(iso) { if (!iso) return ""; try { const d = new Date(iso); return d.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }); } catch(e) { return ""; } }
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function norm(s) { return String(s || "").replace(/\s+/g, " ").trim().toLowerCase(); }
+function qrPayload(m) { return "ABUSEIFEIN-YOUTH|" + m.id + "|" + m.name; }
+function idFor(i) { return "AS-" + String(i + 1).padStart(3, "0"); }
+function saveLocal() { try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(members)); } catch(e){} }
+
+/* UI Toasts & Dialogs */
+function showToast(text, icon = "✨") {
+  const t = $("toastNotification"); $("toastText").textContent = text; $("toastIcon").textContent = icon;
+  t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3200);
+}
+function confirmDialog(msg, isDanger = false) {
+  return new Promise(res => {
+    $("confirmModalMsg").textContent = msg;
+    const okBtn = $("confirmModalOk"); okBtn.className = isDanger ? "btn btn-danger" : "btn btn-primary";
+    $("confirmModal").classList.add("open");
+    okBtn.onclick = () => { $("confirmModal").classList.remove("open"); res(true); };
+    $("confirmModalCancel").onclick = () => { $("confirmModal").classList.remove("open"); res(false); };
+  });
+}
+function setCloudStatus(isOnline, message) {
+  const dot = $("cloudIndicator"); const txt = $("cloudStatusText");
+  if (isOnline) { dot.className = "cloud-dot online"; txt.textContent = message || "متصل بالسحابة اللحظية"; } 
+  else { dot.className = "cloud-dot"; txt.textContent = message || "انقطع الاتصال بالسحابة"; }
+}
+
+/* Navigation */
+function switchView(viewId) {
+  document.querySelectorAll(".view-panel").forEach(p => p.style.display = "none");
+  const target = $(viewId); if (target) target.style.display = "block";
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.view === viewId));
+  document.querySelectorAll(".dock-item").forEach(b => b.classList.toggle("active", b.dataset.view === viewId));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  if(viewId === 'viewPulse') renderPulseTab();
+}
+document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => switchView(btn.dataset.view)));
+
+function initIntroExperience() {
+  const splash = $("splashOverlay"); if (sessionStorage.getItem("intro_viewed")) { splash.classList.add("hide"); return; }
+  const dismiss = () => { splash.classList.add("hide"); sessionStorage.setItem("intro_viewed", "true"); };
+  $("btnSkipIntro").onclick = dismiss; setTimeout(dismiss, 1900);
+}
+function updateLiveDateHeader() { try { $("currentLiveDate").textContent = new Date().toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" }); } catch(e){} }
+
+/* ID Card Rendering */
+function cardHTML(m, isPrint = false) {
+  return `<div class="${isPrint ? "printCard " : "card-print-canvas"}"><div class="card-head"><div><div class="card-brand-title">أسرة أبي سيفين وتماف إيريني</div><div class="card-brand-sub">اجتماع الشباب</div></div><div class="${isPrint ? "qr-print-box " : "card-qr-box"} qr-target" data-payload="${esc(qrPayload(m))}"></div></div><div><div class="card-body-name">${esc(m.name)}</div><div class="card-body-id">رقم العضوية: ${esc(m.id)}</div></div><div class="card-foot">كارت عضوية إلكتروني • يُبرز عند الحضور</div></div>`;
+}
+function makeQRCodeInElement(el, payload) { if (!el) return; el.innerHTML = ""; new QRCode(el, { text: payload, width: 68, height: 68, correctLevel: QRCode.CorrectLevel.M }); }
+function openCardModal(m) { singlePrintMember = m; const container = $("cardModalContainer"); container.innerHTML = cardHTML(m, false); makeQRCodeInElement(container.querySelector(".qr-target"), qrPayload(m)); $("cardModal").classList.add("open"); }
+$("btnCloseCardModal").onclick = () => $("cardModal").classList.remove("open");
+$("btnDismissCard").onclick = () => $("cardModal").classList.remove("open");
+$("btnPrintSingleCard").onclick = () => { if (singlePrintMember) printMembersList([singlePrintMember]); };
+
+/* Members Explorer */
+function getFilteredMembers() { const q = ($("memberSearchInput").value || "").trim().toLowerCase(); return members.filter(m => (m.name + " " + m.id).toLowerCase().includes(q)); }
+function renderMembersExplorer() {
+  const filtered = getFilteredMembers();
+  $("totalMembersBadge").textContent = members.length; $("selectedCountBadge").textContent = selected.size;
+  $("membersEmptyMsg").style.display = filtered.length ? "none" : "block";
+
+  $("membersCardsContainer").innerHTML = filtered.map(m => {
+    const isPresent = !!weeklyRecords[m.id]; const initial = (m.name || "ع").trim().charAt(0);
+    return `<div class="member-vip-card"><div class="card-user-header"><div class="avatar-halo">${initial}</div><div class="card-user-info"><h4>${esc(m.name)}</h4><span class="card-id-pill">${esc(m.id)}</span></div><input type="checkbox" class="row-select-check" data-id="${esc(m.id)}" ${selected.has(m.id) ? "checked" : ""}></div><div class="card-meta-row"><span>جلسة اليوم:</span><span class="status-pill ${isPresent ? "present" : "absent"}">${isPresent ? "حاضر ✓" : "غائب ✕"}</span></div><div><input type="text" class="cell-input member-note-input" data-id="${esc(m.id)}" value="${esc(m.note || "")}" placeholder="ملاحظة عن العضو..."></div><div class="card-actions-bar"><button class="btn btn-secondary btn-sm btn-show-card" data-id="${esc(m.id)}">عرض الكارت</button><button class="btn btn-ghost btn-sm btn-print-single" data-id="${esc(m.id)}">طباعة</button><button class="btn btn-danger btn-sm btn-delete-single" data-id="${esc(m.id)}">حذف</button></div></div>`;
+  }).join("");
+
+  $("membersTableBody").innerHTML = filtered.map(m => `<tr><td style="text-align:center;"><input type="checkbox" class="row-select-check" data-id="${esc(m.id)}" ${selected.has(m.id) ? "checked" : ""}></td><td><b style="color:var(--gold-400);">${esc(m.id)}</b></td><td><input type="text" class="cell-input m-name" data-id="${esc(m.id)}" value="${esc(m.name)}"></td><td><input type="text" class="cell-input m-phone" data-id="${esc(m.id)}" value="${esc(m.phone || '')}" placeholder="012..."></td><td><input type="date" class="cell-input m-dob" data-id="${esc(m.id)}" value="${esc(m.birthdate || '')}"></td><td><input type="text" class="cell-input member-note-input" data-id="${esc(m.id)}" value="${esc(m.note || "")}" placeholder="ملاحظة..."></td><td><div style="display:flex; gap:6px;"><button class="btn btn-secondary btn-sm btn-show-card" data-id="${esc(m.id)}">QR</button><button class="btn btn-danger btn-sm btn-delete-single" data-id="${esc(m.id)}">حذف</button></div></td></tr>`).join("");
+  $("masterMember").checked = filtered.length > 0 && filtered.every(m => selected.has(m.id));
+}
+
+$("viewMembers").addEventListener("click", e => {
+  const btn = e.target.closest("button"); if (!btn) return;
+  const id = btn.dataset.id; const m = members.find(x => x.id === id);
+  if (btn.classList.contains("btn-show-card") && m) openCardModal(m);
+  else if (btn.classList.contains("btn-print-single") && m) printMembersList([m]);
+  else if (btn.classList.contains("btn-delete-single") && id) deleteMembersBulk([id]);
+});
+
+$("viewMembers").addEventListener("change", async e => {
+  const t = e.target; const id = t.dataset.id; if (!id || !db) return;
+  if (t.classList.contains("row-select-check")) { if (t.checked) selected.add(id); else selected.delete(id); $("selectedCountBadge").textContent = selected.size; } 
+  else {
+    let update = {};
+    if (t.classList.contains("m-name")) update = { name: t.value.trim() };
+    else if (t.classList.contains("m-phone")) update = { phone: t.value.trim() };
+    else if (t.classList.contains("m-dob")) update = { birthdate: t.value };
+    else if (t.classList.contains("member-note-input")) update = { note: t.value.trim() };
+    if (Object.keys(update).length) { try { await setDoc(doc(db, "members", id), update, { merge: true }); showToast("تم حفظ التعديل"); } catch(err){} }
+  }
+});
+
+$("memberSearchInput").addEventListener("input", renderMembersExplorer);
+$("btnViewCards").onclick = () => { activeViewMode = "cards"; $("btnViewCards").classList.add("active"); $("btnViewList").classList.remove("active"); $("membersCardsContainer").style.display = "grid"; $("membersTableContainer").style.display = "none"; };
+$("btnViewList").onclick = () => { activeViewMode = "list"; $("btnViewList").classList.add("active"); $("btnViewCards").classList.remove("active"); $("membersCardsContainer").style.display = "none"; $("membersTableContainer").style.display = "block"; };
+$("selectAll").onclick = () => { members.forEach(m => selected.add(m.id)); renderMembersExplorer(); };
+$("clearSelection").onclick = () => { selected.clear(); renderMembersExplorer(); };
+$("masterMember").onchange = e => { getFilteredMembers().forEach(m => { if (e.target.checked) selected.add(m.id); else selected.delete(m.id); }); renderMembersExplorer(); };
+
+async function deleteMembersBulk(ids) {
+  if (!db || !ids.length) return; if (!await confirmDialog("هل أنت متأكد من حذف " + ids.length + " عضو نهائيًا من السحابة؟", true)) return;
+  try { for (let i = 0; i < ids.length; i += 400) { const b = writeBatch(db); ids.slice(i, i + 400).forEach(id => b.delete(doc(db, "members", id))); await b.commit(); } ids.forEach(id => selected.delete(id)); showToast("تم حذف الأعضاء بنجاح"); } catch(e) { showToast("تعذر الحذف", "⚠️"); }
+}
+$("clearBtn").onclick = () => { if (members.length) deleteMembersBulk(members.map(m => m.id)); };
+
+/* ==========================================================================
+   🫀 PULSE TAB LOGIC (Follow-up, Streaks, Birthdays)
+   ========================================================================== */
+window.openWhatsApp = function(phone, name) {
+  if(!phone) return alert("الرجاء إضافة رقم واتساب (أو موبايل) للعضو أولاً من قائمة الأعضاء (زر جدول).");
+  let f = phone.trim(); if(f.startsWith("01")) f = "2" + f; 
+  const text = encodeURIComponent(`مساء الخير يا ${name}، وحشتنا النهاردة في اجتماع الشباب! نتمنى تكون بخير ومستنيينك الجمعة الجاية 🤍`);
+  window.open(`https://wa.me/${f}?text=${text}`, '_blank');
+}
+
+function renderPulseTab() {
+  if(!members.length) return;
+
+  const absentMembers = members.filter(m => !attendanceMap[m.id]);
+  $("pulseAbsentList").innerHTML = absentMembers.length ? absentMembers.slice(0,15).map(m => `<div class="pulse-row"><div class="pulse-user-info"><div style="width:36px; height:36px; border-radius:50%; background:var(--bad-bg); border:1px solid var(--bad); display:grid; place-items:center; color:var(--bad);">✕</div><div><div style="font-weight:700; font-size:14px;">${esc(m.name)}</div><div style="font-size:11px; color:var(--text-muted);">${esc(m.id)}</div></div></div><button class="btn btn-whatsapp btn-sm" onclick="openWhatsApp('${esc(m.phone)}', '${esc(m.name)}')">تواصل واتساب</button></div>`).join("") : `<div style="text-align:center; color:var(--ok); padding:20px;">الكل حاضر ببركة ربنا 🎉</div>`;
+
+  const pastDays = [...allHistoricalDays].sort((a,b) => b.date.localeCompare(a.date));
+  let streaksData = members.map(m => { let streak = 0; for(const day of pastDays) { if(day.records[m.id]) streak++; else break; } return { ...m, streak }; }).filter(m => m.streak > 1).sort((a,b) => b.streak - a.streak).slice(0,10);
+  $("pulseStreaksList").innerHTML = streaksData.length ? streaksData.map(m => `<div class="pulse-row"><div class="pulse-user-info"><div style="font-weight:700; font-size:14px;">${esc(m.name)}</div></div><div class="streak-fire">🔥 ${m.streak} أسابيع</div></div>`).join("") : `<div style="text-align:center; color:var(--text-muted); padding:20px;">يحتاج الأعضاء لتسجيل حضور متتالي لبناء السلسلة</div>`;
+
+  const currentMonth = String(new Date().getMonth() + 1).padStart(2, "0");
+  const bdays = members.filter(m => m.birthdate && m.birthdate.split("-")[1] === currentMonth);
+  $("pulseBirthdaysList").innerHTML = bdays.length ? bdays.map(m => `<div class="pulse-row"><div class="pulse-user-info"><div style="font-size:20px;">🎉</div><div><div style="font-weight:700; font-size:14px; color:var(--gold-200);">${esc(m.name)}</div><div style="font-size:11px; color:var(--text-muted);">يوم ${m.birthdate.split("-")[2]}</div></div></div></div>`).join("") : `<div style="text-align:center; color:var(--text-muted); padding:20px;">لا توجد أعياد ميلاد مسجلة هذا الشهر</div>`;
+}
+
+/* ==========================================================================
+   ATTENDANCE RECORDING (WITH LIVE SEARCH & DROPDOWN)
+   ========================================================================== */
+function renderAttendanceTable() {
+  const q = ($("quickCode").value || "").trim().toLowerCase();
+  
+  // Table filters as normal based on input
+  const list = members.filter(m => (m.name + " " + m.id).toLowerCase().includes(q));
+
+  const presentCount = members.filter(m => attendanceMap[m.id]).length;
+  const absentCount = members.length - presentCount;
+  const pct = members.length ? Math.round((presentCount / members.length) * 100) : 0;
+
+  $("presentCount").textContent = presentCount; $("absentCount").textContent = absentCount; $("attendancePct").textContent = pct + "%";
+  $("dashTotalMembers").textContent = members.length; $("dashPresentCount").textContent = presentCount; $("dashAbsentCount").textContent = absentCount; $("dashAttendanceRate").textContent = pct + "%";
+  $("projLiveCount").textContent = presentCount; $("projLiveTotal").textContent = members.length;
+
+  $("attendanceEmpty").style.display = list.length ? "none" : "block";
+
+  $("attendanceBody").innerHTML = list.map(m => {
+    const isPresent = !!attendanceMap[m.id];
+    return `<tr><td style="text-align:center;"><input type="checkbox" class="att-row-check" data-id="${esc(m.id)}" ${selected.has(m.id) ? "checked" : ""}></td><td><b style="color:var(--gold-400);">${esc(m.id)}</b></td><td><b>${esc(m.name)}</b></td><td><span class="status-pill ${isPresent ? "present" : "absent"}">${isPresent ? "حاضر ✓" : "غائب ✕"}</span></td><td><div class="toggle-btn-group"><button class="toggle-item-btn ${isPresent ? "active-ok" : ""}" data-id="${esc(m.id)}" data-v="1">حاضر</button><button class="toggle-item-btn ${!isPresent ? "active-bad" : ""}" data-id="${esc(m.id)}" data-v="0">غائب</button></div></td><td><input type="text" class="cell-input att-note-input" data-id="${esc(m.id)}" value="${esc(attendanceNotes[m.id] || "")}" placeholder="ملاحظة الحضور..."></td></tr>`;
+  }).join("");
+  $("masterAtt").checked = list.length > 0 && list.every(m => selected.has(m.id));
+  if(document.getElementById('viewPulse').style.display === 'block') renderPulseTab();
+}
+
+$("attendanceBody").addEventListener("click", e => { const b = e.target.closest(".toggle-item-btn"); if (!b) return; setSingleAttendance(b.dataset.id, b.dataset.v === "1"); });
+$("attendanceBody").addEventListener("input", e => {
+  const t = e.target; if (!t.classList.contains("att-note-input")) return;
+  const id = t.dataset.id; const text = t.value; const date = sessionDate();
+  clearTimeout(noteDebounceTimers[id]);
+  noteDebounceTimers[id] = setTimeout(async () => { if(db) { try{ await setDoc(doc(db, "attendance", date), { notes: { [id]: text } }, { merge: true }); }catch(e){} } }, 600);
+});
+
+async function setSingleAttendance(id, isPresent) { if (db) { try { await setDoc(doc(db, "attendance", sessionDate()), { records: { [id]: isPresent } }, { merge: true }); } catch(e){} } }
+async function setBulkAttendance(ids, isPresent) { if (!db || !ids.length) return; const records = {}; ids.forEach(id => records[id] = isPresent); try { await setDoc(doc(db, "attendance", sessionDate()), { records }, { merge: true }); showToast("تم تحديث الحضور"); } catch(e){} }
+
+$("markAllPresent").onclick = () => setBulkAttendance(members.map(m => m.id), true);
+$("markSelPresent").onclick = () => setBulkAttendance([...selected], true);
+$("markSelAbsent").onclick = () => setBulkAttendance([...selected], false);
+$("resetAttendance").onclick = async () => { if (db && await confirmDialog("تحويل كافة الأعضاء إلى (غائب) لتاريخ " + sessionDate() + "؟", true)) { try { await setDoc(doc(db, "attendance", sessionDate()), { records: {} }, { mergeFields: ["records"] }); showToast("تمت إعادة ضبط حضور اليوم"); } catch(e){} } };
+
+$("masterAtt").onchange = e => { members.forEach(m => { if (e.target.checked) selected.add(m.id); else selected.delete(m.id); }); renderAttendanceTable(); };
+$("attendanceBody").addEventListener("change", e => { const t = e.target; if (t.classList.contains("att-row-check")) { if (t.checked) selected.add(t.dataset.id); else selected.delete(t.dataset.id); } });
+
+/* High-Speed Input + Dropdown Overlay */
+function resolveMemberQuery(raw) {
+  const s = String(raw || "").trim(); if (!s) return null;
+  if (s.includes("ABUSEIFEIN-YOUTH")) { const parts = s.split("|"); if (parts.length >= 2) { const match = members.find(m => m.id === parts[1]); if (match) return match; } }
+  const q = s.toLowerCase();
+  const byId = members.find(m => m.id.toLowerCase() === q); if (byId) return byId;
+  const byName = members.filter(m => m.name.toLowerCase().includes(q));
+  if (byName.length === 1) return byName[0];
+  if (byName.length > 1) return { ambiguous: byName };
+  return null;
+}
+
+// 1. Show dynamic dropdown overlay when typing
+$("quickCode").addEventListener("input", e => {
+  const q = e.target.value.trim().toLowerCase();
+  const dropdown = $("quickSearchResults");
+  
+  if (!q) {
+    dropdown.style.display = "none";
+    renderAttendanceTable(); 
+    return;
+  }
+
+  const results = members.filter(m => (m.name + " " + m.id).toLowerCase().includes(q));
+  
+  if (!results.length) {
+    dropdown.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted); font-size:13px;">لا توجد نتائج مطابقة لـ "${esc(q)}"</div>`;
+    dropdown.style.display = "flex";
+    renderAttendanceTable();
+    return;
+  }
+
+  // Generate nice floating cards for top 6 matches
+  dropdown.innerHTML = results.slice(0, 6).map(m => {
+    const isPresent = !!attendanceMap[m.id];
+    return `
+    <div class="quick-search-item" onclick="quickMarkAttendance('${esc(m.id)}')">
+      <div>
+        <div style="font-weight:700; color:#fff; font-size:14.5px;">${esc(m.name)}</div>
+        <div style="font-size:11.5px; color:var(--gold-400); margin-top:2px;">${esc(m.id)}</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        ${isPresent ? `<span class="status-pill present" style="font-size:11px; padding:2px 8px;">مسجل ✓</span>` : ``}
+        <button class="btn ${isPresent ? 'btn-ghost' : 'btn-primary'} btn-sm" style="padding:6px 12px; font-size:12px;">
+          ${isPresent ? 'تعديل' : 'تسجيل حضور'}
+        </button>
+      </div>
+    </div>`;
+  }).join("");
+  
+  dropdown.style.display = "flex";
+  renderAttendanceTable(); // sync the background table too
+});
+
+// 2. Click action for the dropdown items
+window.quickMarkAttendance = async (id) => {
+  const m = members.find(x => x.id === id);
+  if(!m) return;
+  
+  await setSingleAttendance(id, true);
+  
+  const msg = $("quickMsg");
+  msg.style.color = "var(--ok)";
+  msg.textContent = `✓ تم تسجيل حضور: ${m.name}`;
+  showToast(`أهلاً بك يا ${m.name} 🤍`, "✓");
+  
+  $("quickCode").value = "";
+  $("quickSearchResults").style.display = "none";
+  $("quickCode").focus(); // Return cursor immediately for rapid typing
+  renderAttendanceTable();
+};
+
+// 3. Keep barcode/scanner enter functionality
+$("quickCode").addEventListener("keydown", async e => {
+  if (e.key !== "Enter") return; 
+  e.preventDefault();
+  const val = $("quickCode").value.trim(); if (!val) return;
+  
+  const res = resolveMemberQuery(val); const msg = $("quickMsg");
+  if (!res) { msg.style.color = "var(--bad)"; msg.textContent = "✕ لم يتم العثور على عضو مطابق لـ: " + val; return; }
+  if (res.ambiguous) { msg.style.color = "var(--gold-200)"; msg.textContent = "⚠️ يوجد أكثر من عضو بنفس الاسم، اختر من القائمة الظاهرة."; return; }
+  
+  await setSingleAttendance(res.id, true);
+  msg.style.color = "var(--ok)"; msg.textContent = `✓ تم تسجيل حضور: ${res.name} (${res.id})`;
+  showToast(`أهلاً بك يا ${res.name} 🤍`, "✓");
+
+  $("quickCode").value = ""; 
+  $("quickSearchResults").style.display = "none";
+  renderAttendanceTable(); 
+});
+
+/* Camera Scanner */
+let cameraStream = null; let cameraScanning = false;
+async function startCameraScanner() {
+  const video = $("scanVideo"); const canvas = $("scanCanvas"); const ctx = canvas.getContext("2d");
+  try { cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }); } catch(e) { showToast("تعذر فتح الكاميرا", "⚠️"); return; }
+  video.srcObject = cameraStream; await video.play();
+  $("scanWrap").style.display = "block"; cameraScanning = true; $("btnToggleCamera").textContent = "إيقاف الكاميرا";
+  const tick = () => {
+    if (!cameraScanning) return;
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(img.data, img.width, img.height);
+      if (code && code.data) handleCameraScannedData(code.data);
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+function stopCameraScanner() { cameraScanning = false; if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; } $("scanWrap").style.display = "none"; $("btnToggleCamera").textContent = "كاميرا الموبايل"; }
+let lastScannedId = null; let lastScannedTime = 0;
+function handleCameraScannedData(payload) {
+  const parts = String(payload).split("|"); if (parts.length < 2 || parts[0] !== "ABUSEIFEIN-YOUTH") return;
+  const id = parts[1]; const m = members.find(x => x.id === id); if (!m) return;
+  const now = Date.now(); if (id === lastScannedId && now - lastScannedTime < 3500) return;
+  lastScannedId = id; lastScannedTime = now;
+  setSingleAttendance(id, true);
+  $("scanMsg").textContent = `✓ تم تسجيل: ${m.name}`; showToast(`تم مسح كارت: ${m.name}`, "✓");
+}
+$("btnToggleCamera").onclick = () => { if (cameraScanning) stopCameraScanner(); else startCameraScanner(); };
+
+/* ==========================================================================
+   GLOBAL SEARCH OVERLAY (Ctrl+K)
+   ========================================================================== */
+function openOmniSearch() { $("searchModal").classList.add("open"); $("omniSearchInput").value = ""; $("omniSearchInput").focus(); renderOmniSearchResults(""); }
+function closeOmniSearch() { $("searchModal").classList.remove("open"); }
+function renderOmniSearchResults(query) {
+  const q = (query || "").trim().toLowerCase();
+  const results = members.filter(m => (m.name + " " + m.id).toLowerCase().includes(q)).slice(0, 8);
+  const container = $("omniSearchResults");
+  if (!results.length) { container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted);">لا توجد نتائج مطابقة</div>`; return; }
+  container.innerHTML = results.map(m => `
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:rgba(0,0,0,0.3); border:1px solid var(--border-dim); border-radius:var(--radius-md); cursor:pointer;" class="search-result-row" data-id="${esc(m.id)}">
+      <div><div style="font-weight:700; color:#fff;">${esc(m.name)}</div><div style="font-size:11px; color:var(--gold-400);">${esc(m.id)}</div></div>
+      <div style="display:flex; gap:6px;"><button class="btn btn-secondary btn-sm" onclick="showMemberFromSearch('${esc(m.id)}')">عرض الكارت</button></div>
+    </div>
+  `).join("");
+}
+window.showMemberFromSearch = id => { closeOmniSearch(); const m = members.find(x => x.id === id); if (m) openCardModal(m); };
+$("btnOpenSearch").onclick = openOmniSearch; $("btnCloseSearch").onclick = closeOmniSearch;
+$("omniSearchInput").addEventListener("input", e => renderOmniSearchResults(e.target.value));
+window.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openOmniSearch(); }
+  else if (e.key === "Escape") { closeOmniSearch(); $("cardModal").classList.remove("open"); $("confirmModal").classList.remove("open"); }
+});
+
+/* ==========================================================================
+   WEEKLY SESSION MANAGEMENT (WITH NEW CODE GENERATOR LOCATION)
+   ========================================================================== */
+function renderWeeklyDashboard() {
+  $("dashWeeklyCode").textContent = weeklySession.code || "—";
+  $("attActiveCodeDisplay").textContent = weeklySession.code || "—"; // Updates the Attendance tab generator display
+  
+  if (weeklySession.date) $("dashHeroDateText").textContent = `جلسة ${weeklySession.date} • اجتماع الشباب`;
+
+  const presentList = members.filter(m => weeklyRecords[m.id]);
+  const absentList = members.filter(m => !weeklyRecords[m.id]);
+  $("dashPresentBadgeCount").textContent = `${presentList.length} حاضر`;
+  $("dashAbsentBadgeCount").textContent = `${absentList.length} غائب`;
+
+  const presentSorted = [...presentList].sort((a, b) => (weeklyTimes[a.id] || "").localeCompare(weeklyTimes[b.id] || ""));
+  const pContainer = $("dashPresentScrollList");
+  if (!presentSorted.length) pContainer.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-size:13px;">في انتظار تسجيل أول حضور...</div>`;
+  else pContainer.innerHTML = presentSorted.map(m => `<div class="leaderboard-row"><div class="leaderboard-user"><span style="color:var(--ok);">✓</span><span>${esc(m.name)}</span></div><b style="color:var(--gold-300); font-size:12px;">${esc(formatTime(weeklyTimes[m.id]))}</b></div>`).join("");
+
+  const aContainer = $("dashAbsentScrollList");
+  if (!absentList.length) aContainer.innerHTML = `<div style="text-align:center; padding:30px; color:var(--ok); font-size:13px;">الكل حاضر بارك الله فيكم 🎉</div>`;
+  else aContainer.innerHTML = absentList.slice(0, 20).map(m => `<div class="leaderboard-row"><div class="leaderboard-user"><span style="color:var(--bad);">✕</span><span>${esc(m.name)}</span></div><span style="font-size:11px; color:var(--text-muted);">${esc(m.id)}</span></div>`).join("");
+}
+
+$("btnCopyWeeklyCode").onclick = () => { if (!weeklySession.code) return; navigator.clipboard.writeText(weeklySession.code); showToast("تم نسخ الكود", "📋"); };
+
+// NEW: Generator logic moved to Attendance tab
+$("btnGenerateAttCode").onclick = async () => {
+  if (!db) return; 
+  const date = sessionDate(); 
+  const code = String(Math.floor(10000 + Math.random() * 90000));
+  if (await confirmDialog(`توليد كود جديد (${code}) لجلسة ${date}؟`, false)) {
+    try { await setDoc(doc(db, "meta", "currentSession"), { date, code }); showToast("تم التوليد وتفعيل الكود بنجاح: " + code); } catch(e){}
+  }
+};
+
+$("btnCopyAttCode").onclick = () => { if (!weeklySession.code) return; navigator.clipboard.writeText(weeklySession.code); showToast("تم نسخ الكود الخماسي", "📋"); };
+
+$("wkExportBtn").onclick = () => {
+  if (!weeklySession.date) return showToast("لا توجد جلسة مفتوحة", "⚠️");
+  const rows = members.map(m => { const present = !!weeklyRecords[m.id]; return [m.id, m.name, present ? "حاضر" : "غائب", present ? formatTime(weeklyTimes[m.id]) : ""]; }).sort((a, b) => (a[2] === b[2] ? 0 : (a[2] === "حاضر" ? -1 : 1)));
+  const wb = XLSX.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
+  const ws = XLSX.utils.aoa_to_sheet([["رقم العضوية", "اسم العضو", "الحالة", "وقت الحضور"], ...rows]);
+  ws["!cols"] = [{ wch: 14 }, { wch: 34 }, { wch: 10 }, { wch: 14 }]; XLSX.utils.book_append_sheet(wb, ws, "حضور"); XLSX.writeFile(wb, "تفاصيل_حضور_" + weeklySession.date + ".xlsx");
+};
+
+/* ==========================================================================
+   GRAND RAFFLE ENGINE & PROJECTOR MODE
+   ========================================================================== */
+$("btnLaunchProjector").onclick = async () => { try { await document.documentElement.requestFullscreen(); } catch(e){} document.body.classList.add("projector-active"); };
+$("btnExitProjector").onclick = () => { try { document.exitFullscreen(); } catch(e){} document.body.classList.remove("projector-active"); };
+document.querySelectorAll(".proj-tab-btn").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".proj-tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelectorAll(".proj-view").forEach(v => v.style.display = "none");
+    $(btn.dataset.target).style.display = "flex";
+  };
+});
+
+function playGrandFanfareSound() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext; if (!AudioCtx) return; const ctx = new AudioCtx();
+    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, idx) => {
+      const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.type = "triangle"; osc.frequency.value = freq;
+      osc.connect(gain); gain.connect(ctx.destination); const start = ctx.currentTime + idx * 0.1;
+      gain.gain.setValueAtTime(0.0001, start); gain.gain.exponentialRampToValueAtTime(0.3, start + 0.03); gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.5);
+      osc.start(start); osc.stop(start + 0.55);
+    });
+  } catch(e){}
+}
+
+function launchConfettiToCanvas(cid) {
+  const c = $(cid); c.width = c.parentElement.clientWidth; c.height = c.parentElement.clientHeight; const ctx = c.getContext("2d");
+  const colors = ["#d4af37", "#fae69e", "#10b981", "#ffffff"];
+  const parts = Array.from({length: 120}, () => ({ x: Math.random()*c.width, y: -20, r: 4+Math.random()*5, c: colors[Math.floor(Math.random()*colors.length)], vx: -2+Math.random()*4, vy: 3+Math.random()*4 }));
+  let f = 0;
+  function run() {
+    f++; ctx.clearRect(0,0,c.width,c.height);
+    parts.forEach(p => { p.x+=p.vx; p.y+=p.vy; ctx.fillStyle=p.c; ctx.fillRect(p.x, p.y, p.r, p.r*1.5); });
+    if(f < 110) requestAnimationFrame(run); else ctx.clearRect(0,0,c.width,c.height);
+  }
+  run();
+}
+
+function renderRaffleState() {
+  const present = members.filter(m => weeklyRecords[m.id] === true);
+  const alreadyWon = new Set(Object.values(raffleWinners).map(w => w.id));
+  const pool = present.filter(m => !raffleNoRepeat || !alreadyWon.has(m.id));
+
+  $("rfPresentToday").textContent = present.length;
+  $("rfPoolCount").textContent = pool.length;
+
+  const warn = $("rfDateWarn");
+  if (weeklySession.date && weeklySession.date !== todayStr()) { warn.textContent = `⚠️ جلسة السحب الحالية (${weeklySession.date}).`; warn.style.display = "block"; } else { warn.style.display = "none"; }
+
+  const list = Object.keys(raffleWinners).map(k => ({ rank: Number(k), ...raffleWinners[k] })).sort((a, b) => a.rank - b.rank);
+  $("raffleWinnersEmpty").style.display = list.length ? "none" : "block";
+  $("raffleWinnersBody").innerHTML = list.map(w => `<tr><td><b style="color:var(--gold-200);">🏆 الجائزة ${w.rank}</b></td><td><b>${esc(w.name)}</b></td><td style="color:var(--text-muted); font-size:12px;">${esc(formatTime(w.time))}</td></tr>`).join("");
+
+  if (!raffling) {
+    const allDone = raffleTotalPrizes > 0 && list.length >= raffleTotalPrizes;
+    $("raffleBtnNormal").disabled = !weeklySession.date || pool.length === 0 || allDone;
+    $("raffleBtnProj").disabled = !weeklySession.date || pool.length === 0 || allDone;
+    if (allDone) { $("raffleSubNormal").textContent = "تم سحب كافة الجوائز"; $("raffleSubProj").textContent = "مبروك للفائزين"; }
+  }
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function runRaffleEngine(bigId, subId, btnId, confettiId) {
+  if (raffling) return;
+  const present = members.filter(m => weeklyRecords[m.id] === true);
+  const alreadyWon = new Set(Object.values(raffleWinners).map(w => w.id));
+  const pool = present.filter(m => !raffleNoRepeat || !alreadyWon.has(m.id));
+  if (!pool.length) return showToast("لا يوجد أعضاء مؤهلون للسحب", "⚠️");
+
+  raffling = true;
+  $("raffleBtnNormal").disabled = true; $("raffleBtnProj").disabled = true;
+
+  const winner = pool[Math.floor(Math.random() * pool.length)];
+  const rank = Object.keys(raffleWinners).length + 1;
+  const big = $(bigId); const sub =$(subId);
+
+  sub.textContent = `سحب الجائزة رقم (${rank})`;
+  for (const num of ["3", "2", "1"]) { big.className = "raffle-display-name"; void big.offsetWidth; big.className = "raffle-display-name bounce"; big.textContent = num; await sleep(650); }
+  
+  const delays = [50, 50, 60, 70, 80, 100, 130, 170, 230, 310, 420];
+  for (const d of delays) { big.textContent = pool[Math.floor(Math.random() * pool.length)].name; await sleep(d); }
+
+  big.textContent = winner.name;
+  big.className = "raffle-display-name winner-hero bounce";
+  sub.textContent = `مبروك يا ${winner.name} 🎉 الجائزة رقم ${rank}`;
+
+  launchConfettiToCanvas(confettiId); playGrandFanfareSound();
+
+  if (db && weeklySession.date) {
+    try { await setDoc(doc(db, "raffle", weeklySession.date), { winners: { [rank]: { id: winner.id, name: winner.name, time: new Date().toISOString() } }, totalPrizes: raffleTotalPrizes, noRepeat: raffleNoRepeat }, { merge: true }); } catch(e){}
+  }
+  raffling = false; renderRaffleState();
+}
+
+$("raffleBtnNormal").onclick = () => runRaffleEngine("raffleBigNormal", "raffleSubNormal", "raffleBtnNormal", "confettiCanvasNormal");
+$("raffleBtnProj").onclick = () => runRaffleEngine("raffleBigProj", "raffleSubProj", "raffleBtnProj", "confettiCanvasProj");
+$("rfReset").onclick = async () => { if (!db || !weeklySession.date) return; if (await confirmDialog("إعادة ضبط وحذف نتائج سحب هذه الجلسة؟", true)) { try { await setDoc(doc(db, "raffle", weeklySession.date), { winners: {} }, { mergeFields: ["winners"] }); showToast("تمت إعادة ضبط السحب"); } catch(e){} } };
+$("rfTotalPrizes").onchange = e => { raffleTotalPrizes = Math.max(1, parseInt(e.target.value, 10) || 1); };
+$("rfNoRepeat").onchange = e => { raffleNoRepeat = e.target.checked; };
+
+/* ==========================================================================
+   ANALYTICS & LIFETIME STATISTICS
+   ========================================================================== */
+function processLifetimeAnalytics(sessions) {
+  const activeSessions = sessions.filter(s => s.records && Object.keys(s.records).length);
+  $("dashSessionsCount").textContent = activeSessions.length;
+  allHistoricalDays = sessions;
+  const stats = {};
+  members.forEach(m => { stats[m.id] = { name: m.name, present: 0, recorded: 0 }; });
+
+  activeSessions.forEach(sess => {
+    Object.keys(sess.records).forEach(id => {
+      if (!stats[id]) { const found = members.find(m => m.id === id); stats[id] = { name: found ? found.name : id, present: 0, recorded: 0 }; }
+      stats[id].recorded++; if (sess.records[id]) stats[id].present++;
+    });
+  });
+  const list = Object.values(stats).filter(s => s.recorded > 0);
+
+  const topP = [...list].sort((a, b) => (b.present - a.present) || (b.present/b.recorded - a.present/a.recorded)).slice(0, 5);
+  $("dashTopPresent").innerHTML = topP.length ? topP.map((s, i) => `<div class="leaderboard-row"><div class="leaderboard-user"><span class="rank-badge">${i+1}</span><span>${esc(s.name)}</span></div><b style="color:var(--ok); font-size:12.5px;">${s.present} من ${s.recorded}</b></div>`).join("") : `<div style="text-align:center; padding:15px; color:var(--text-muted);">لا يوجد بيانات</div>`;
+
+  const topA = [...list].map(s => ({ ...s, absent: s.recorded - s.present })).sort((a, b) => (b.absent - a.absent) || (a.present/a.recorded - b.present/b.recorded)).slice(0, 5);
+  $("dashTopAbsent").innerHTML = topA.length ? topA.map((s, i) => `<div class="leaderboard-row"><div class="leaderboard-user"><span class="rank-badge" style="border-color:var(--bad-border); color:var(--bad);">${i+1}</span><span>${esc(s.name)}</span></div><b style="color:var(--bad); font-size:12.5px;">${s.absent} غياب</b></div>`).join("") : `<div style="text-align:center; padding:15px; color:var(--text-muted);">لا يوجد بيانات</div>`;
+
+  $("dashAllBody").innerHTML = [...list].sort((a, b) => a.name.localeCompare(b.name, "ar")).map(s => {
+    const id = Object.keys(stats).find(k => stats[k] === s) || ""; const pct = s.recorded ? Math.round((s.present / s.recorded) * 100) : 0;
+    return `<tr><td><b style="color:var(--gold-400);">${esc(id)}</b></td><td>${esc(s.name)}</td><td>${s.present} / ${s.recorded}</td><td><span class="panel-badge">${pct}%</span></td></tr>`;
+  }).join("");
+
+  if(document.getElementById('viewPulse').style.display === 'block') renderPulseTab();
+}
+
+/* ==========================================================================
+   FIREBASE LISTENERS & INITIALIZATION
+   ========================================================================== */
+function subscribeAttendanceForDate(date) {
+  if (unsubAttendance) { unsubAttendance(); unsubAttendance = null; }
+  attendanceMap = {}; attendanceNotes = {}; renderAttendanceTable();
+  if (!db) return;
+  unsubAttendance = onSnapshot(doc(db, "attendance", date), snap => {
+    const d = snap.exists() ? snap.data() : {}; attendanceMap = d.records || {}; attendanceNotes = d.notes || {}; renderAttendanceTable();
+  });
+}
+
+function subscribeWeeklyAttendanceData(date) {
+  if (unsubWeeklyAtt) { unsubWeeklyAtt(); unsubWeeklyAtt = null; }
+  weeklyRecords = {}; weeklyTimes = {}; renderWeeklyDashboard();
+  if (!db || !date) return;
+  unsubWeeklyAtt = onSnapshot(doc(db, "attendance", date), snap => {
+    const d = snap.exists() ? snap.data() : {}; weeklyRecords = d.records || {}; weeklyTimes = d.times || {}; renderWeeklyDashboard(); renderRaffleState();
+  });
+}
+
+function subscribeWeeklyMetaSession() {
+  if (unsubWeeklyMeta) unsubWeeklyMeta();
+  unsubWeeklyMeta = onSnapshot(doc(db, "meta", "currentSession"), snap => {
+    const d = snap.exists() ? snap.data() : {}; weeklySession = { date: d.date || null, code: d.code || null };
+    renderWeeklyDashboard(); subscribeWeeklyAttendanceData(weeklySession.date); subscribeRaffleSession(weeklySession.date);
+  });
+}
+
+function subscribeRaffleSession(date) {
+  if (unsubRaffle) { unsubRaffle(); unsubRaffle = null; }
+  raffleWinners = {}; renderRaffleState();
+  if (!db || !date) return;
+  unsubRaffle = onSnapshot(doc(db, "raffle", date), snap => {
+    const d = snap.exists() ? snap.data() : {}; raffleWinners = d.winners || {};
+    if (typeof d.totalPrizes === "number") raffleTotalPrizes = d.totalPrizes; if (typeof d.noRepeat === "boolean") raffleNoRepeat = d.noRepeat;
+    renderRaffleState();
+  });
+}
+
+function subscribeLifetimeDashboard() {
+  if (unsubAllAttendance) unsubAllAttendance();
+  unsubAllAttendance = onSnapshot(collection(db, "attendance"), snap => {
+    const days = snap.docs.map(d => ({ date: d.id, records: d.data().records || {}, notes: d.data().notes || {} }));
+    processLifetimeAnalytics(days);
+  });
+}
+
+function bootFirebaseCloud() {
+  try {
+    const app = initializeApp(firebaseConfig); db = getFirestore(app); setCloudStatus(true, "متصل بالسحابة اللحظية");
+    onSnapshot(collection(db, "members"), snap => {
+      members = snap.docs.map(d => d.data()).sort((a, b) => a.id.localeCompare(b.id));
+      const validIds = new Set(members.map(m => m.id)); selected = new Set([...selected].filter(id => validIds.has(id)));
+      saveLocal(); renderMembersExplorer(); renderAttendanceTable(); renderWeeklyDashboard();
+    }, err => { console.error(err); setCloudStatus(false, "انقطع اتصال السحابة"); });
+    subscribeAttendanceForDate(sessionDate()); subscribeWeeklyMetaSession(); subscribeLifetimeDashboard();
+  } catch(err) { console.error(err); setCloudStatus(false, "خطأ في تهيئة السحابة"); }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  initIntroExperience(); updateLiveDateHeader();
+  $("sessionDate").value = todayStr(); 
+  
+  // This clears up the analytics view's redundant inputs but makes sure we have default values if needed
+  if($("wkNewDate")) $("wkNewDate").value = nextFriday();
+  
+  $("sessionDate").onchange = () => subscribeAttendanceForDate(sessionDate());
+  renderMembersExplorer(); renderAttendanceTable(); bootFirebaseCloud();
+});
+
+</script>
+</body>
+</html>
